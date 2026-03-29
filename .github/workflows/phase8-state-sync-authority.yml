@@ -1,0 +1,30 @@
+name: AFL Phase8 State Sync Authority
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase8-state-sync-authority.yml'
+
+jobs:
+  state-sync-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: python -m pip install pyyaml
+
+      - name: Run state sync smoke
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_state_sync_smoke.ps1 -RepoRoot . -Port 9018 -Scenario .\tests\runtime\scenarios\state_sync_quickmatch.yaml

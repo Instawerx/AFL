@@ -1,34 +1,36 @@
-# AFL Phase 7 — Network Layer + Live Player Connections
+# AFL Phase 8 — State Sync Engine + Match Authority
 
-This pack upgrades AFL from local multiplayer orchestration into a **real-time network session scaffold**.
+This pack upgrades AFL from a local network session scaffold into an **authoritative state sync layer**.
 
 It adds:
 
-- a lightweight TCP session server
-- a live client connector for local players/bots
-- match state sync scaffolding
-- session event broadcast loop
-- PowerShell runners for server and clients
-- sample network scenarios
-- CI workflow for local network smoke checks
+- authoritative match server
+- state tick broadcaster
+- client action validator
+- client state sync simulator
+- authority result emitter
+- PowerShell runners
+- CI workflow for state sync smoke checks
 
 ## What this pack does
 
 This pack can:
 
-- start a local TCP session server
-- accept multiple client connections
-- process simple join / ready / state messages
-- broadcast session state to all connected clients
-- generate network session artifacts for AFL runtime validation
+- start an authoritative local session server
+- maintain a match state model
+- accept player actions
+- validate allowed actions
+- advance the match through server ticks
+- broadcast state snapshots to clients
+- emit authoritative match result artifacts
 
 ## What this pack does not claim
 
 This pack does not provide:
-- production-grade netcode
-- finished Unreal replication
-- production EOS transport
-- anti-cheat
-- internet-hosted matchmaking
+- production Unreal replication
+- production anti-cheat
+- internet-scale networking
+- full rollback netcode
+- production persistence
 
-It is the correct next layer so AFL can move from simulated multiplayer into **live local connected sessions**.
+It is the correct next layer after Phase 7 so AFL can move from connected sessions into **authoritative server-driven match state**.

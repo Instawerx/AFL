@@ -1,0 +1,12 @@
+.github/workflows/phase8-state-sync-authority.yml
+.gitignore
+README.md
+build/scripts/run_state_sync_server.ps1
+build/scripts/run_state_sync_smoke.ps1
+docs/phase8_state_sync_authority.md
+tests/runtime/action_validator.py
+tests/runtime/authoritative_match_server.py
+tests/runtime/authority_result_emitter.py
+tests/runtime/scenarios/state_sync_quickmatch.yaml
+tests/runtime/state_models.py
+tests/runtime/state_sync_client_sim.py
