@@ -1,0 +1,23 @@
+{
+  "match_id": "afl_match_demo_010",
+  "session_id": "afl_session_demo_010",
+  "tick": 12,
+  "state": "match_live",
+  "winner": null,
+  "players": {
+    "player_alpha": {
+      "player_id": "player_alpha",
+      "team": "A",
+      "ready": true,
+      "connected": true,
+      "objective_control": 1
+    },
+    "player_beta": {
+      "player_id": "player_beta",
+      "team": "B",
+      "ready": true,
+      "connected": true,
+      "objective_control": 0
+    }
+  }
+}

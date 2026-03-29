@@ -1,0 +1,33 @@
+name: AFL Phase10 Unreal Broadcast
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase10-unreal-broadcast.yml'
+
+jobs:
+  spectator-broadcast-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Seed authoritative state
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path .\artifacts\runtime | Out-Null
+          Copy-Item .\tests\runtime\scenarios\state_seed_example.json .\artifacts\runtime\authoritative_state_snapshot.json -Force
+
+      - name: Run spectator sim
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_spectator_sim.ps1 -RepoRoot . -Port 9120 -OutputDir .\artifacts\broadcast

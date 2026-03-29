@@ -1,34 +1,32 @@
-# AFL Phase 9 — Persistence Layer + Session History + Replay Index
+# AFL Phase 10 — Unreal Real-Time State Sync + Spectator Broadcast Layer
 
-This pack upgrades AFL from authoritative match state into a local persistence and replay index layer.
+This pack upgrades AFL from persistence/replay into a **visual investor-demo layer**.
 
 It adds:
 
-- persistent session store
-- persistent match store
-- replay index builder
-- artifact archive writer
-- history query utility
+- a local UDP state broadcaster
+- a spectator event overlay generator
+- a state packet schema
+- a spectator simulator
 - PowerShell runners
-- CI workflow for persistence checks
+- Unreal-facing integration docs
+- CI workflow for broadcast smoke tests
 
 ## What this pack does
 
 This pack can:
 
-- save authoritative session artifacts into a local data store
-- archive match results and reward results
-- build a replay index from stored sessions
-- query recent sessions and matches
-- persist local history across repeated runs
+- stream authoritative state snapshots over UDP
+- generate overlay-ready event payloads
+- simulate a spectator client consuming the stream
+- emit broadcast artifacts for HUD / overlay / replay systems
 
 ## What this pack does not claim
 
 This pack does not provide:
-- production database replication
-- cloud object storage
-- large-scale analytics
-- full replay rendering
-- production identity linkage
+- finished Unreal Blueprint integration
+- production-quality net serialization
+- final broadcast graphics package
+- cloud relay infrastructure
 
-It is the correct next layer after Phase 8 so AFL can move from authoritative runtime outputs into **persistent session history and replayable artifact management**.
+It is the correct next layer for a gameplay-first, investor-readable AFL demo.
