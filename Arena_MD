@@ -1,0 +1,834 @@
+# 1) MASTER GOAL
+
+Build a **single unforgettable AFL launch arena** that immediately communicates:
+
+- premium robotic combat identity
+- scale
+- spectacle
+- sponsor readiness
+- investor-grade visual polish
+- future expandability
+
+The arena should feel like a **high-end live robotics combat venue** adapted into a **web-first cinematic 3D experience**.
+
+This is **not** a cluttered gameplay map.
+This is a **presentation-first flagship environment**.
+
+---
+
+# 2) SCENE ROLE
+
+## Primary Role
+Serve as the main **prelaunch website 3D hero environment**.
+
+## Secondary Role
+Act as a reusable:
+- investor demo scene
+- screenshot capture environment
+- robot skin showcase backdrop
+- pitch deck visual source
+- promo clip staging environment
+
+## Future Role
+Expand later into:
+- guided arena exploration
+- interactive hotspot flows
+- robot profile system
+- sponsor integration zones
+- eventually deeper SIM or gameplay showcases
+
+---
+
+# 3) ARENA DIMENSIONS
+
+## Recommended Footprint
+Use a clean launch footprint that feels large without becoming too heavy.
+
+- **Width:** 50 meters
+- **Length:** 70 meters
+- **Playable / focal center:** 30m x 30m
+- **Rear elevated command zone:** 12m x 18m
+- **Entry presentation zone:** 10m x 18m
+- **Left and right flank cover fields:** 12m x 18m each
+
+## Vertical Scale
+- Main ground elevation: 0m
+- Saucer rise / mound: +1.5m to +2.5m
+- Throne platform: +2m to +3m
+- Raised weapon side node: +1m to +1.75m
+
+---
+
+# 4) MASTER LAYOUT OVERVIEW
+
+The arena should be built around a **forward-weighted central composition**.
+
+## Main Visual Hierarchy
+1. **Downed Alien Saucer** — central hero anchor
+2. **Shielded King’s Chair** — rear elevated authority icon
+3. **Robot Hero** — placed for scale and brand identity
+4. **Weapons and barrier field** — support structure
+5. **Sponsor pillars and signage** — premium event identity
+6. **Debris and support props** — realism and depth
+
+## Golden Rule
+At a glance, the visitor should instantly understand:
+- this is AFL
+- this is robotics combat
+- this is premium
+- this is expandable into something bigger
+
+---
+
+# 5) ZONE MAP
+
+Use this layout structure:
+
+```text
+[ NORTH / REAR ]
+
+   Z5  Rear Command Zone / Throne Platform
+   Z4L Rear Left Support        Z4R Rear Right Support
+
+         Z3 Main Center Hero / Saucer Zone
+
+   Z2L Left Flank Cover         Z2R Right Flank Cover
+
+         Z1 Front Entry / Presentation Zone
+
+[ SOUTH / FRONT ]
+```
+
+---
+
+# 6) ZONE-BY-ZONE PLACEMENT SYSTEM
+
+---
+
+## Z1 — FRONT ENTRY / PRESENTATION ZONE
+
+### Purpose
+This is the visitor’s first impression zone.
+
+It should:
+- establish scale
+- frame the saucer immediately
+- show AFL branding
+- leave room for CTA overlays
+- invite exploration
+
+### Recommended Dimensions
+- Width: 20m
+- Depth: 10m to 14m
+
+### Place Here
+- 2 LED AFL / sponsor pillars
+- subtle floor guidance lights
+- one scale robot or support robot
+- minimal debris
+- optional low barrier strips
+- “Enter Arena” hotspot anchor
+- UI-safe negative space for site copy
+
+### Do Not Place Here
+- too many large props
+- thick fog
+- heavy cover clutter
+- oversized signage blocking the main center view
+
+### Design Goal
+The eye should be pulled through Z1 directly into Z3.
+
+---
+
+## Z2L — LEFT FLANK COVER FIELD
+
+### Purpose
+This zone creates asymmetry, combat depth, and believable arena structure.
+
+### Recommended Dimensions
+- Width: 12m
+- Depth: 18m
+
+### Primary Assets
+- `AFL_PROP_TruckCrash_A`
+- `AFL_PROP_BarrierWall_A`
+- `AFL_PROP_AlienSpike_A`
+- `AFL_ENV_Debris_A`
+- `AFL_ENV_Crate_A`
+
+### Placement Logic
+- place truck at a slight angle, not square to the scene
+- place barrier walls in staggered arrangement
+- use alien spike cluster to break up hard mechanical forms
+- keep a visible lane toward the saucer
+
+### Function
+This zone creates:
+- screenshot parallax
+- cover silhouette variation
+- realism
+- stronger cinematic orbit shots
+
+---
+
+## Z2R — RIGHT FLANK COVER FIELD
+
+### Purpose
+This balances the left flank while keeping the scene asymmetrical enough to stay interesting.
+
+### Recommended Dimensions
+- Width: 12m
+- Depth: 18m
+
+### Primary Assets
+- `AFL_PROP_SatelliteCrash_A`
+- `AFL_PROP_BarrierWall_B`
+- `AFL_ENV_Crate_A`
+- `AFL_ENV_Cables_A`
+- `AFL_BRAND_PillarLED_A`
+
+### Placement Logic
+- satellite tower should lean or lie in a visually dynamic direction
+- sponsor pillar should be visible, but not stronger than the saucer
+- crates and cables should support utility storytelling
+- keep enough open space for a secondary camera lane
+
+### Function
+This zone supports:
+- secondary camera compositions
+- sponsor-readiness
+- technical atmosphere
+- scene balance
+
+---
+
+## Z3 — MAIN CENTER HERO ZONE
+
+### Purpose
+This is the heart of the launch environment.
+
+### Primary Asset
+- `AFL_PROP_SaucerHero_A`
+
+### Recommended Dimensions
+- Width: 24m to 30m
+- Depth: 24m to 30m
+
+### Placement Logic
+- center slightly forward of scene midpoint
+- partially embedded into terrain
+- tilt forward and slightly to one side
+- expose visible energy fractures and mount points
+- place broken hull fragments around it, not everywhere
+
+### Supporting Assets
+- `AFL_WEAPON_Gatling_A`
+- `AFL_ENV_HullFragments_A`
+- `AFL_ENV_Debris_A`
+- one hero robot
+- floor decals or light strips
+- optional ramp or access platform
+
+### Function
+This zone must achieve:
+- strongest hero shot
+- immediate visual recognition
+- believable combat identity
+- best backdrop for robot brand reveal
+
+### Hard Rule
+Nothing in the arena should visually overpower Z3.
+
+---
+
+## Z4L — REAR LEFT SUPPORT ZONE
+
+### Purpose
+This zone supports the throne and helps layer the background.
+
+### Assets
+- barrier segments
+- shield emitter support node
+- debris cluster
+- optional utility console
+- low lighting structures
+
+### Function
+Add depth and framing without stealing attention.
+
+---
+
+## Z4R — REAR RIGHT SUPPORT ZONE
+
+### Purpose
+This zone supports the throne and provides technical storytelling.
+
+### Assets
+- `AFL_TOOL_PowerStation_A`
+- `AFL_TOOL_UtilityConsole_A`
+- `AFL_ENV_Cables_A`
+- one small barrier
+- subtle sponsor-ready surface
+
+### Function
+Helps the throne area feel operational and purposeful.
+
+---
+
+## Z5 — REAR COMMAND ZONE / THRONE PLATFORM
+
+### Purpose
+This is the symbolic dominance zone.
+
+### Primary Asset
+- `AFL_PROP_ThroneShield_A`
+
+### Secondary Assets
+- `AFL_TOOL_ShieldGen_A`
+- shield emitter pylons or support nodes
+- stairs or reinforced platform trim
+- soft backlights or rim lighting
+- optional secondary robot pose
+
+### Placement Logic
+- throne centered behind the saucer
+- raised enough to remain visible from entry
+- not so high that it floats visually
+- framed by lighting or shield emitters
+- preserve negative space around silhouette
+
+### Function
+This zone communicates:
+- championship
+- control
+- authority
+- premium event identity
+
+---
+
+# 7) WEAPON PLACEMENT KIT
+
+---
+
+## Main Visible Weapon
+### `AFL_WEAPON_Gatling_A`
+Place on top of or integrated into the saucer.
+
+**Rules**
+- it must be visible from the entry camera
+- it should not look tiny relative to the saucer
+- angle it for silhouette clarity
+- keep the barrel facing toward open arena space
+
+---
+
+## Secondary Heavy Weapon
+### `AFL_WEAPON_Plasma_A`
+Place on a right or rear elevated side node.
+
+**Rules**
+- keep it readable but secondary
+- let it hint at arena systems
+- do not block the throne silhouette
+
+---
+
+## Defense / Utility Weapon
+### `AFL_WEAPON_DefenseCannon_A`
+Place in a flank or support position.
+
+**Rules**
+- use only if composition stays clean
+- this is optional for launch
+- remove it if clutter begins
+
+---
+
+# 8) TOOL / SYSTEM PLACEMENT KIT
+
+---
+
+## Shield Generator
+### `AFL_TOOL_ShieldGen_A`
+Best placement:
+- near throne platform
+- beside a command path
+- near a defense pocket
+
+Use it to imply:
+- future gameplay systems
+- energy shields
+- technical sophistication
+
+---
+
+## Power Station
+### `AFL_TOOL_PowerStation_A`
+Best placement:
+- rear support zone
+- side utility lane
+- weapon feed area
+
+---
+
+## Utility Console
+### `AFL_TOOL_UtilityConsole_A`
+Best placement:
+- rear platform access
+- side technical nook
+- near sponsor or arena systems hotspot
+
+---
+
+# 9) ROBOT STAGING KIT
+
+Use **2 to 3 robots max** for launch.
+
+---
+
+## Robot 1 — Hero Robot
+### Placement
+- on or near the saucer
+- visible from entry and orbit shots
+- strongest branded skin
+
+### Purpose
+Primary scale and brand anchor.
+
+---
+
+## Robot 2 — Scale Robot
+### Placement
+- near entry or flank cover field
+- lower visual importance
+- quieter pose
+
+### Purpose
+Helps users instantly read the arena scale.
+
+---
+
+## Robot 3 — Optional Support Robot
+### Placement
+- near throne or system zone
+- only if composition can handle it
+
+### Purpose
+Suggests a larger AFL world without overcrowding the scene.
+
+---
+
+# 10) CAMERA GRID SYSTEM
+
+Build around five core cameras.
+
+---
+
+## Camera A — Entry Hero Cam
+### Purpose
+First impression.
+
+### Position
+- front-center
+- low angle
+- sees entry lane, saucer, throne
+
+### Motion
+- slow forward dolly
+- subtle lateral drift
+
+### Must Show
+- saucer silhouette
+- AFL branding
+- at least one robot
+- enough negative space for UI
+
+---
+
+## Camera B — Main Orbit Cam
+### Purpose
+Website idle loop hero shot.
+
+### Position
+- medium-wide orbit around Z3
+- high enough to show left and right flanks
+- low enough to preserve scale
+
+### Motion
+- slow orbit
+- very smooth
+- subtle rise/fall optional
+
+### Must Show
+- saucer
+- throne
+- cover fields
+- one sponsor pillar
+
+---
+
+## Camera C — Saucer Detail Cam
+### Purpose
+Showcase hero prop quality.
+
+### Position
+- closer lens
+- side-front angle
+- lower than eye line
+
+### Motion
+- short arc or slow push
+
+### Must Show
+- hull damage
+- weapon mount
+- energy glow
+- robot scale reference
+
+---
+
+## Camera D — Investor CTA Cam
+### Purpose
+Supports text overlays and sign-up call to action.
+
+### Position
+- stable, balanced frame
+- throne and saucer visible
+- negative space on one side
+
+### Must Show
+- premium environment
+- readability for text
+- clean composition
+
+---
+
+## Camera E — Robot Showcase Cam
+### Purpose
+Show off the branded robot skin.
+
+### Position
+- medium shot
+- use backlight or edge light
+- keep environment recognizable but secondary
+
+### Must Show
+- robot branding
+- enough arena context to stay on-theme
+
+---
+
+# 11) HERO SHOT COMPOSITION RULES
+
+Every final camera should follow these principles:
+
+## Rule 1
+The saucer is always the anchor unless the shot is specifically about the robot.
+
+## Rule 2
+The throne must remain visually important but secondary.
+
+## Rule 3
+At least one strong diagonal element should exist in wide shots.
+
+## Rule 4
+Do not center everything perfectly. Use controlled asymmetry.
+
+## Rule 5
+Leave negative space for UI when the shot is intended for the site.
+
+## Rule 6
+Every shot must still read “AFL” without text.
+
+---
+
+# 12) UI SAFE ZONES
+
+This arena is for a prelaunch website and investor presentation, so preserve overlay space.
+
+## Safe Area Recommendations
+
+### Top Left
+- AFL logo
+- navigation
+
+### Left Lower Third
+- short pitch copy
+- subheadline
+
+### Right Side Vertical Stack
+- CTA buttons
+- Join Prelaunch
+- Investor Access
+- Explore Arena
+
+### Bottom Edge
+- minimal secondary controls only
+
+## Never Cover
+- hero robot face or chest area
+- saucer center silhouette
+- throne upper silhouette
+
+---
+
+# 13) HOTSPOT PLACEMENT MAP
+
+Use a limited hotspot system.
+
+---
+
+## Hotspot 1 — Entry Marker
+**Label:** Enter AFL  
+**Location:** Z1  
+**Function:** start guided intro flow
+
+---
+
+## Hotspot 2 — Saucer
+**Label:** Arena Centerpiece  
+**Location:** Z3  
+**Function:** explain AFL arena concept and live event vision
+
+---
+
+## Hotspot 3 — Hero Robot
+**Label:** Meet the Robot  
+**Location:** Z3  
+**Function:** show robot profile, brand skin, capabilities
+
+---
+
+## Hotspot 4 — Throne
+**Label:** Command Platform  
+**Location:** Z5  
+**Function:** explain league structure / modes / control systems
+
+---
+
+## Hotspot 5 — Arena Systems
+**Label:** Arena Tech  
+**Location:** Z4R or weapon side node  
+**Function:** show systems / future tech / expansion path
+
+---
+
+## Hotspot 6 — Join Prelaunch
+**Label:** Join Prelaunch  
+**Location:** branded pillar or clean CTA anchor  
+**Function:** trigger sign-up flow
+
+---
+
+# 14) LIGHTING LAYOUT KIT
+
+---
+
+## Global Recipe
+Use a dramatic night-fight environment with premium contrast.
+
+### Main Light
+- cool directional moon-style light
+
+### Rim Light
+- blue edge light from one side
+
+### Fill Light
+- violet soft fill from the opposite side
+
+### Accent Lights
+- orange hazard accents near systems, damage, or power sources
+
+---
+
+## Placement Guidance
+
+### Entry Zone
+- low floor lights
+- subtle guidance strips
+
+### Saucer Zone
+- internal energy glow
+- underside bounce glow
+- broken hull fracture emission
+
+### Throne Zone
+- back rim light
+- shield glow accents
+- subtle vertical framing lights
+
+### Flanks
+- lower intensity
+- keep readable but not brighter than the center
+
+---
+
+# 15) FOG / ATMOSPHERICS KIT
+
+Use atmosphere carefully.
+
+## Good Use
+- light dust haze
+- thin energy mist near saucer fractures
+- subtle volumetric glow in distance
+
+## Bad Use
+- thick smoke blankets
+- over-fogging the UI view
+- obscuring robot silhouettes
+
+The scene should feel cinematic, not muddy.
+
+---
+
+# 16) PERFORMANCE LAYOUT RULES
+
+Since this is web-first, layout discipline matters.
+
+## Rule A
+Use a few strong hero props, not many mediocre props.
+
+## Rule B
+Repeat modular barrier walls and debris intelligently.
+
+## Rule C
+Avoid stacking too many transparent shield objects.
+
+## Rule D
+Keep background density lower than center density.
+
+## Rule E
+Use lighting and composition to imply scale, not endless objects.
+
+---
+
+# 17) BUILD ORDER
+
+Use this exact order.
+
+## Step 1
+Lay down ground base and perimeter boundaries.
+
+## Step 2
+Place the saucer in Z3.
+
+## Step 3
+Place the throne in Z5.
+
+## Step 4
+Block in left and right flank cover fields.
+
+## Step 5
+Add weapons and tool systems.
+
+## Step 6
+Add sponsor pillars and AFL signage.
+
+## Step 7
+Place robots.
+
+## Step 8
+Add debris and support props.
+
+## Step 9
+Set camera grid.
+
+## Step 10
+Place hotspots and CTA anchors.
+
+## Step 11
+Tune lighting and fog.
+
+## Step 12
+Remove clutter until the scene reads cleanly from all five cameras.
+
+---
+
+# 18) CLEAN COPY-PASTE LAYOUT BLOCK
+
+Use this directly in your planning workflow:
+
+```text
+Build an AFL Assault Arena launch layout for a web-first cinematic 3D scene. Use a 50 meter by 70 meter arena footprint with a forward-centered crashed alien saucer as the dominant hero centerpiece, a raised shielded king’s chair command platform behind it, left and right asymmetrical cover fields, and a clean front presentation zone for first impression and UI overlays.
+
+The saucer must be the strongest visual anchor and should be partially embedded into the ground with visible energy fractures, hull damage, and a mounted gatling turret. The throne should sit on a raised rear platform and remain visible from the main entry view. The left flank should use a destroyed futuristic military truck, modular barrier walls, alien spike forms, and debris. The right flank should use a crashed satellite structure, barrier walls, utility props, cables, and at least one sponsor-ready LED pillar.
+
+Use only 2 to 3 robots maximum: one hero robot near the saucer, one scale robot near the front or flank, and one optional support robot near the rear command area if composition remains clean. Create five camera zones: entry hero, orbit, saucer detail, investor CTA, and robot showcase. Preserve negative space for website overlays and sign-up CTAs. Keep the scene dramatic, premium, sponsor-friendly, and readable from multiple cinematic angles.
+```
+
+---
+
+# 19) FINAL QUALITY CONTROL CHECKLIST
+
+Before calling the launch layout done, confirm:
+
+## Identity
+- Does it unmistakably feel like AFL?
+
+## Hierarchy
+- Is the saucer clearly the hero object?
+
+## Scale
+- Do the robots make the arena feel believable?
+
+## Clarity
+- Can the scene read from wide and medium shots?
+
+## Premium Feel
+- Does it look expensive and intentional, not crowded?
+
+## Web Practicality
+- Can this actually run and function for a prelaunch site?
+
+If any of these fail, simplify.
+
+---
+
+# 20) WHAT THIS KIT SOLVES
+
+This layout kit prevents:
+- random placement
+- cluttered asset stacking
+- weak hero shots
+- broken camera logic
+- poor website integration
+- visual confusion
+
+It gives you:
+- a disciplined arena build structure
+- repeatable placement logic
+- investor-grade hero shot planning
+- a cleaner path from Meshy to Antigravity
+
+---
+
+# 21) BEST NEXT PACKS AFTER THIS
+
+After layout, the strongest next build files are:
+
+## Pack 1
+**Robot Skin Presentation Pack**
+- exact robot posing
+- sponsor skin reveal logic
+- camera staging for brand partners
+
+## Pack 2
+**Lighting and Cinematic Capture Pack**
+- screenshot angles
+- reel shots
+- promo loop planning
+
+## Pack 3
+**AFL HQ Lobby Layout Kit**
+- premium corporate interior scene for investors and signups
+
+---
+
+# 22) FINAL NOTE
+
+The launch scene does not need to show everything.
+
+It needs to show the **right things** in the **right places** with **high control**.
+
+That is how it feels Tier 1 instead of overloaded.
