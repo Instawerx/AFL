@@ -3,3 +3,7 @@ artifacts/
 *.tmp
 .env
 .env.local
+
+*.zip
+*.tar.gz
+*_manifest.txt
