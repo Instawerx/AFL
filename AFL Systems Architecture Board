@@ -1,0 +1,83 @@
+AFL Systems Architecture Board v1
+Purpose
+
+This document captures the high‑level architecture for Avatar Fight League (AFL). It defines the systems, modules and data flows required to build a modular, scalable robotics sports‑combat platform in Unreal. It sets clear ownership boundaries to prevent feature creep and ensures that all future modes (Assault, Laser Tag, Paintball) plug into a common combat and arena framework.
+
+1. Core Modules and Responsibilities
+Module	Responsibility
+AFLCore	Base robot pawn, shared stats (health, structure, stamina, energy), team enums and tags.
+AFLCombatCore	Shared combat vocabulary, hit routing, damage event interfaces, combat data assets.
+AFLCombatMelee	Tackle, collision and knockback logic for impact‑based combat.
+AFLCombatHitscan	Hitscan/beam weapons, trace confirmation and scoring for laser tag.
+AFLCombatProjectile	Projectile spawning, travel, splat and paint logic for paintball.
+AFLArena	Round manager, spawn zones, objective zones, overtime, win conditions, map‑level hazards.
+AFLModeAssault	Assault Core ruleset (objective capture/pressure, denial, scoring).
+AFLModeLaserTag	Laser Tag mode ruleset (hitscan scoring and respawn pacing).
+AFLModePaintball	Paintball mode ruleset (projectile splat and zone pressure/elimination).
+AFLMatchmaking	Queue creation, party/lobby management, session assignment, skill rating integration.
+AFLEconomy	Soft currency (Coins), access Tickets, XP, reward calculation, anti‑abuse checks.
+AFLProgression	XP tracking, mastery, seasonal progression, player performance bands.
+AFLBroadcast	Spectator cameras, replay hooks, HUD overlays, broadcast events.
+AFLAudio	Imported announcer/voice assets, event sound routing, robot voice triggers.
+AFLUI	Menu flows, queue UI, HUD/telemetry panels, match summary screens.
+AFLNet	Network/session scaffolding, replication helpers and online authority.
+AFLTools	Development utilities, validation scripts, debug visualizers, automation hooks.
+2. Module Interaction Diagram (Conceptual)
+[Input / Robot Control]
+      ↓
+  [AFLCombat*] ←→ [AFLObjective] ←→ [AFLScore]
+      |                 |
+      ↓                 ↓
+  [AFLSpawn]         [AFLBroadcast]
+      |                 |
+      ↓                 ↓
+    [Arena]      [HUD / Camera / Audio]
+      |
+      ↓
+[Level Data + Props + FX]
+
+*AFLCombat* refers to the family of combat modules (Melee, Hitscan, Projectile) used by the active mode.
+
+3. Key Data Assets & Tables
+Arena Data – lane widths, obstacle positions, hotspots, objective zones, camera anchors, spawn points.
+Objective Data – capture hold durations, contest thresholds, scoring values, overtime rules.
+Score Event Table – points for primary captures, support scoring (entry, hold ticks, midfield control), denial bonuses.
+
+Spawn Data – deployment bay positions, respawn timers, safe re‑entry paths, team metadata.
+Broadcast & Replay Data – camera markers, event popups, overtime alerts, replay trigger points.
+
+4. AI and Automation Integration
+NeoStack – In‑editor assistant used to place props, organize actors, connect Blueprints and iterate on level layouts. It commits changes to feature branches and is constrained to safe zones (data assets, Blueprints and content folders). It cannot modify replication authority or reward logic.
+Claude – External planning and code generation agent. It helps break down features, produce C++ scaffolding, define modules, generate BuildGraph/UAT scripts and test plans. Claude does not merge directly to mainline without review.
+Automation Loop – Each iteration follows: NeoStack edits → Claude interprets → Unreal builds & runs tests → Simulation logs analyzed → Feedback applied. The loop repeats until success criteria are met.
+
+5. Audio & FX Integration
+ElevenLabs is used offline to generate announcer lines, robot voices, warnings and stingers. Audio clips are imported into Content/AFL/Audio/Events and mapped to events via AFLAudio cues. There is no live API dependency during gameplay.
+FX placement (sparks, steam, smoke) is handled via AFLArena and AFLFX layers within the level. Data layers separate geometry, gameplay, broadcast and FX, ensuring clean iteration.
+
+6. Implementation Priorities
+Core Systems – build round manager, objective controller, scoring system, spawn logic and respawn loops.
+Assault Mode Rules – implement objective capture/pressure logic, denial bonuses and scoring events for Crash Site Omega.
+Matchmaking & Economy Shells – queue/party flows, hidden rating buckets, Coins/Tickets/XP, reward payout screens.
+Broadcast & Telemetry – add camera anchors, HUD overlays, announcer triggers, robot vitals and objective state panels.
+Automation – integrate validation scripts, BuildGraph pipelines, packaged smoke tests and end‑to‑end queue → arena → reward loops.
+
+7. Module Extensibility
+
+The architecture supports adding new arenas, modes and combat families without disrupting existing systems. Each new mode lives in its own module and reuses core combat families, scoring and broadcast hooks. Arenas plug into AFLArena and carry their own data assets. The combat families (melee, hitscan, projectile) are independent modules that can be mixed per mode.
+
+8. First Test Criteria
+
+To consider Crash Site Omega and the Assault Core mode “ready for internal playtest”, the following must be true:
+
+Objective capture functions end‑to‑end, awarding points and declaring round winners.
+Scoring events fire correctly for entry, hold ticks and denial bonuses.
+Spawn and respawn loops work, with safe re‑entry and no spawn camping.
+Robots collide and knockback logic feels weighty and fair.
+Hotspots in the arena generate contested fights and lane flow matches the design board.
+Camera markers are valid and broadcast anchors produce watchable angles.
+Audio triggers exist for objective start, denial, overtime, round end and match end.
+Automated tests (unit tests and packaged smoke tests) pass with no build errors.
+No AI edits have broken protected authority zones or reward logic.
+
+Once these conditions are met, the vertical slice is ready for broader feedback and further expansion.
