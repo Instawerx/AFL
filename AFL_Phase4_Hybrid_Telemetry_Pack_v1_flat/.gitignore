@@ -1,0 +1,7 @@
+artifacts/
+*.log
+*.tmp
+.env
+.env.local
+runtime.env.local
+__pycache__/

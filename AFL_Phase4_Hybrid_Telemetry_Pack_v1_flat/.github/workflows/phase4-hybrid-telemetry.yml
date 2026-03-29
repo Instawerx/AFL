@@ -1,0 +1,40 @@
+name: AFL Phase4 Hybrid Telemetry
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase4-hybrid-telemetry.yml'
+
+jobs:
+  telemetry-file-mode:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: python -m pip install pyyaml
+
+      - name: Run telemetry file mode
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_match_telemetry_file_mode.ps1 -RepoRoot . -Scenario .\tests\runtime\scenarios\multi_capture.yaml
+
+      - name: Build match result
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_match_result_builder.ps1 -RepoRoot . -EventFile .\artifacts\runtime\match_events.json
+
+      - name: Validate reward
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_reward_validation.ps1 -RepoRoot . -ResultFile .\artifacts\runtime\match_result.json
