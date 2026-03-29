@@ -1,36 +1,34 @@
-# AFL Phase 8 — State Sync Engine + Match Authority
+# AFL Phase 9 — Persistence Layer + Session History + Replay Index
 
-This pack upgrades AFL from a local network session scaffold into an **authoritative state sync layer**.
+This pack upgrades AFL from authoritative match state into a local persistence and replay index layer.
 
 It adds:
 
-- authoritative match server
-- state tick broadcaster
-- client action validator
-- client state sync simulator
-- authority result emitter
+- persistent session store
+- persistent match store
+- replay index builder
+- artifact archive writer
+- history query utility
 - PowerShell runners
-- CI workflow for state sync smoke checks
+- CI workflow for persistence checks
 
 ## What this pack does
 
 This pack can:
 
-- start an authoritative local session server
-- maintain a match state model
-- accept player actions
-- validate allowed actions
-- advance the match through server ticks
-- broadcast state snapshots to clients
-- emit authoritative match result artifacts
+- save authoritative session artifacts into a local data store
+- archive match results and reward results
+- build a replay index from stored sessions
+- query recent sessions and matches
+- persist local history across repeated runs
 
 ## What this pack does not claim
 
 This pack does not provide:
-- production Unreal replication
-- production anti-cheat
-- internet-scale networking
-- full rollback netcode
-- production persistence
+- production database replication
+- cloud object storage
+- large-scale analytics
+- full replay rendering
+- production identity linkage
 
-It is the correct next layer after Phase 7 so AFL can move from connected sessions into **authoritative server-driven match state**.
+It is the correct next layer after Phase 8 so AFL can move from authoritative runtime outputs into **persistent session history and replayable artifact management**.

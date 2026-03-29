@@ -1,0 +1,50 @@
+name: AFL Phase9 Persistence Replay
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase9-persistence-replay.yml'
+
+jobs:
+  persistence-replay:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Seed authoritative artifact
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path .\artifacts\runtime | Out-Null
+          @'
+          {
+            "match_id": "afl_match_seed_001",
+            "session_id": "afl_session_seed_001",
+            "winner": "player_alpha",
+            "session_valid": true,
+            "objective_events": [
+              { "event_type": "authoritative_match_end", "winner": "player_alpha", "tick": 12 }
+            ],
+            "coins_awarded": 100,
+            "xp_awarded": 250
+          }
+          '@ | Set-Content .\artifacts\runtime\authoritative_match_result.json
+
+      - name: Run persistence archive
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_persistence_archive.ps1 -RepoRoot . -RuntimeDir .\artifacts\runtime -DataDir .\data\afl
+
+      - name: Build replay index
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_replay_index_build.ps1 -RepoRoot . -DataDir .\data\afl
