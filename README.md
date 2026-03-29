@@ -1,32 +1,34 @@
-# AFL Phase 10 — Unreal Real-Time State Sync + Spectator Broadcast Layer
+# AFL Phase 11 — HUD / Broadcast Overlay Pack
 
-This pack upgrades AFL from persistence/replay into a **visual investor-demo layer**.
+This pack upgrades AFL from raw broadcast/state output into a **watchable spectator overlay layer**.
 
 It adds:
 
-- a local UDP state broadcaster
-- a spectator event overlay generator
-- a state packet schema
-- a spectator simulator
-- PowerShell runners
-- Unreal-facing integration docs
-- CI workflow for broadcast smoke tests
+- scoreboard packet builder
+- lower-third / player card payload builder
+- announcer event feed builder
+- match director state controller
+- camera packet scaffold
+- PowerShell runners for overlay generation
+- CI workflow for overlay smoke checks
 
 ## What this pack does
 
 This pack can:
 
-- stream authoritative state snapshots over UDP
-- generate overlay-ready event payloads
-- simulate a spectator client consuming the stream
-- emit broadcast artifacts for HUD / overlay / replay systems
+- turn authoritative/broadcast state into HUD-ready JSON
+- generate overlay packets for scoreboard, player cards, and event callouts
+- build a simple match director state file
+- emit camera packet scaffolds for future Unreal consumption
+- provide investor/demo-facing broadcast artifacts
 
 ## What this pack does not claim
 
 This pack does not provide:
-- finished Unreal Blueprint integration
-- production-quality net serialization
-- final broadcast graphics package
-- cloud relay infrastructure
+- final Unreal UMG widgets
+- production broadcast graphics
+- live replay compositor
+- final commentary AI
+- final camera automation logic
 
-It is the correct next layer for a gameplay-first, investor-readable AFL demo.
+It is the correct next layer to make AFL visually legible and pitch-ready.

@@ -1,0 +1,23 @@
+{
+  "match_id": "afl_match_broadcast_011",
+  "session_id": "afl_session_broadcast_011",
+  "tick": 34,
+  "state": "completed",
+  "winner": "player_alpha",
+  "players": {
+    "player_alpha": {
+      "player_id": "player_alpha",
+      "team": "A",
+      "ready": true,
+      "connected": true,
+      "objective_control": 2
+    },
+    "player_beta": {
+      "player_id": "player_beta",
+      "team": "B",
+      "ready": true,
+      "connected": true,
+      "objective_control": 1
+    }
+  }
+}
