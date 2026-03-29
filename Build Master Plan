@@ -1,0 +1,106 @@
+AFL Unreal Build Master Plan v3
+Purpose
+
+This master plan defines how Avatar Fight League (AFL) will be assembled in Unreal Engine using our chosen AI tools, custom automation and modular systems. It addresses the lessons learned in previous iterations and introduces a clear roadmap that ties together arena design, online play, progression, economy and testing. Every decision described here must be followed unless explicitly superseded in a later approved plan.
+
+Key Updates from v2
+Combat families not just Assault – Lyra’s shooter backbone is retained and abstracted into three combat families: melee/tackle, hitscan/beam and projectile/paint. Assault is the first mode built on top of this foundation, but Laser Tag and Paintball modes will follow without re‑architecting combat.
+Arena reference pack is now upstream – Before any gameplay work, each arena must have a finished reference pack comprising hero artwork, top‑down tactical map, builder callout, gameplay flow overlay and detail sheets for objectives, spawns and hotzones.
+Pre‑production phase – A new Phase 0 establishes the arena visual truth before Lyra pruning or code work. Only after the reference pack is approved does development proceed.
+Modules expanded – Dedicated modules for matchmaking, economy and progression are added. Mode modules (Assault, Laser Tag, Paintball) own only mode‑specific rules and must not absorb combat foundations.
+Automation spine – Unreal’s native automation stack (BuildGraph, UAT, Automation Test Framework and Gauntlet) becomes mandatory. AI tools accelerate content production but do not bypass the build/test/promote ladder.
+Protected authority zones – Reward grants, session truth and anti‑abuse logic remain server‑authoritative and cannot be modified by AI scripts.
+Overall Product Vision
+
+AFL is a robotics-centric competitive platform. At launch it will showcase one investor‑ready vertical slice: Crash Site Omega running the Assault Core mode with matchmaking, economy, progression and broadcast support. Future versions will add Laser Tag and Paintball modes, new arenas and deeper league systems. The core experience should feel like a televised robotic sport with camera‑friendly arenas, clear scoring and readable HUD/telemetry.
+
+Phase Breakdown
+Phase 0 – Arena Reference Truth
+
+Before any code or blockout work, the first arena must be fully defined visually. Deliverables:
+
+Hero key art of Crash Site Omega.
+Top‑down tactical map showing lanes, objectives, spawns and cover.
+Builder callout board with orthographic views and labelled landmarks.
+Gameplay flow overlay showing typical routes, hotspots and camera value.
+Detail sheets for objective zone, spawn zones and midfield wreck zone.
+
+These reference assets are stored under Docs/AFL/ArenaReference/CrashSiteOmega/ and inform every later decision.
+
+Phase 1 – Lyra Prune / AFL Skeleton
+
+Lyra is imported as scaffolding. We strip out sample maps, cosmetics, emotes and unused demo content while preserving the input system, Gameplay Ability System patterns, equipment/weapon frameworks and multiplayer-safe architecture. We establish the following modules:
+
+AFLCore – robot base pawn, common tags and shared structs.
+AFLCombatCore – shared combat vocabulary and events.
+AFLCombatMelee – tackle, collision and knockback logic.
+AFLCombatHitscan – beam/laser hitscan logic.
+AFLCombatProjectile – projectile/splat logic for paintball.
+AFLArena – match state, objective and spawn zones.
+AFLModeAssault – rules specific to Assault Core on Crash Site Omega.
+AFLMatchmaking – queues, parties and session handoff.
+AFLEconomy – coins, tickets, reward rules and anti‑abuse checks.
+AFLProgression – XP, mastery and rank state.
+AFLBroadcast – spectator cameras and overlay logic.
+AFLAudio – offline audio import and event routing.
+AFLUI – HUD/telemetry panels and menus.
+AFLTools – debug helpers, validation scripts and automation hooks.
+
+Each module owns its domain completely; features must not leak across module boundaries.
+
+Phase 2 – AFL Core Gameplay Slice
+
+Implement the basic robot pawn, movement, stamina/energy and hit reactions. Build the tackle/impact loop and camera logic. Create the first objective zone, round manager and match loop. Expose these systems via data assets for tuning. No network or economy yet.
+
+Phase 3 – Arena Construction
+
+Using the Crash Site Omega reference pack and Cargo assets, block out the arena. Build the deployment bays, centre lane, flank lanes, midfield wreck zone and objective core. Ensure readability and camera value. Only after lanes play well do we add AFL‑specific props and branding. Use Data Layers to separate geometry, gameplay anchors, broadcast anchors, lighting, FX and audio. Validate that one robot can traverse all lanes with correct collisions.
+
+Phase 4 – Assault Core Loop
+
+Add the full Assault Core ruleset: objective capture with 10‑second hold, support scoring (entry, hold ticks, midfield control), denial bonuses and overtime. Implement the scoreboard and round timer. Integrate announcer voice stingers (offline imported via ElevenLabs). Add HUD panels that read like robot telemetry: vitals, energy, objective status and match state. Hook up match events to the broadcast system for camera cues. Verify that a complete round can be played end‑to‑end with bots or players.
+
+Phase 5 – Online Shell
+
+Implement matchmaking with EOS Lobbies and Sessions. Support Quick Match and Private Match queues. Add simple hidden MMR buckets. Build party assembly, ready checks, session handoff and reconnect flows. Integrate network replication for the robot pawn, combat events and objective states. At this stage, matches can be played over the network but reward grants are stubbed.
+
+Phase 6 – Economy / Progression
+
+Introduce AFL Coins (soft currency), Tickets (mode access) and XP. Define payout rules: captures, wins, holds and denial events grant coins and XP. Tickets are consumed to enter challenge modes. Implement the rewards screen and update the wallet and progression state on the backend. Add anti‑abuse checks: no rewards for AFK players, reduced rewards in private sessions and replay fairness checks. Build a simple progression bar and account level display.
+
+Phase 7 – Broadcast / Spectator Layer
+
+Add spectator join support. Create camera anchors for hero intro, centre‑lane clash, midfield overview, objective climax and aerial sweep. Implement lower‑third overlays showing score, timer, capture progress and robot vitals. Trigger announcer callouts on key events. Add a highlight reel stub that records timestamped events for later replay. Ensure the HUD and broadcast overlays never obscure critical gameplay information.
+
+Phase 8 – Automation / Build Pipeline
+
+Wire up BuildGraph to orchestrate compile, validation, tests, cook, package, smoke tests and promotion. Use UAT for build steps, the Automation Test Framework for fast editor tests and Gauntlet for packaged end‑to‑end tests (queue to reward). Set up shared DDC for derived data and Perforce as the primary source control for Unreal content, with Git for backend and scripts. Create Data Validation rules to ensure naming, tagging, collision, objective anchors, broadcast anchors and audio metadata are correct. Configure performance gates (load times, memory, actor count, frame time) for every build. Define a promotion ladder: dev → validated → playable → candidate → release.
+
+Matchmaking and Economy Integration
+
+Matchmaking and economy layers must be designed together. Each match is created via EOS Sessions and must specify a Session Class (PublicCompetitive, PrivateLobby, SkillsChallenge, SpectatorOnly, InternalTest). Rewards and progression are granted only for PublicCompetitive or Challenge sessions. Private lobbies yield reduced payouts. The hidden MMR system tracks wins, captures, denial plays and average impact to seed players into buckets. Tickets gate entry to Skills Challenge modes and events. All reward grants are server‑authoritative.
+
+Skills Challenge System
+
+Skills Challenges provide tension without gambling. They are short objective‑focused drills (timed objective rush, denial gauntlet, accuracy challenge). Players pay Tickets to enter and earn Coins/XP based on completion and placement. Challenges have daily free entries and ticket‑gated slots, encouraging fair participation. The challenge mode runs on its own session class and uses the same combat families (melee, hitscan or projectile) with simplified rules.
+
+Anti‑Abuse and Security
+
+From day one, AFL must implement anti‑abuse measures: no rewards for AFK or disconnect‑abuse patterns; reduced rewards in private tests; detection of repeated collusion; ticket consumption validation; hidden MMR checks to prevent smurfing; and strict separation between client prediction and server authority. The economy must be self‑contained (no real‑money gambling) and all high‑impact decisions (reward grants, session wins) must be server‑verifiable.
+
+Performance and Observability
+
+Performance budgets (frame time, load time, memory, actor count) are tracked from the first playable builds. BuildGraph tasks include capturing key metrics and comparing them against previous baselines. Symbol files and logs are retained for analysis. Automated screenshot capture ensures visual consistency. Observability hooks feed telemetry on queue times, match completion rates, economy grants and network stability back to the backend for monitoring.
+
+Definition of Done for v3 Slice
+
+The Crash Site Omega vertical slice is considered complete when:
+
+The arena reference pack is locked and the map matches its visuals.
+The Assault Core mode plays end‑to‑end with objective scoring, support scoring, denial bonuses and live overtime.
+The robot pawn feels weighty with visible energy/vital readouts and collisions are satisfying.
+Matchmaking (Quick Match and Private Match) connects players into sessions and handles reconnects.
+Economy pays out Coins, Tickets and XP correctly with anti‑abuse checks.
+The broadcast camera and overlay show the match clearly, with announcer stingers firing.
+Build automation compiles, validates, packages and runs packaged smoke tests without manual intervention.
+All systems are data‑driven, modular and ready to support Laser Tag and Paintball modes without re‑architecting combat.
