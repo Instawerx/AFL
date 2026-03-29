@@ -1,0 +1,35 @@
+name: AFL Phase6 Multiplayer Orchestrator
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase6-multiplayer-orchestrator.yml'
+
+jobs:
+  multiplayer-sim:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: python -m pip install pyyaml
+
+      - name: Run session registry check
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_session_registry_check.ps1 -RepoRoot .
+
+      - name: Run multiplayer session
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_multiplayer_session.ps1 -RepoRoot . -Scenario .\tests\runtime\scenarios\multiplayer_quickmatch.yaml -OutputDir .\artifacts\runtime

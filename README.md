@@ -1,25 +1,35 @@
-# AFL Phase 5 — Live Unreal Hook + Match Playback Loop
+# AFL Phase 6 — Multiplayer Orchestrator + Real Match Sessions
 
-This pack upgrades AFL from hybrid telemetry into a **live Unreal hook + playback loop**.
+This pack upgrades AFL from live event playback into a local multiplayer orchestration layer.
 
 It adds:
 
-- a live file watcher for Unreal-emitted event logs
-- a playback runner for recorded match event streams
-- a unified live hook controller
-- replay-ready artifact generation
-- a simple event timeline builder
-- PowerShell runners for live hook and playback mode
-- CI workflow for playback validation
+- session registry
+- lobby simulator
+- multiplayer match coordinator
+- session-backed orchestrator
+- PowerShell runners
+- sample multiplayer scenarios
+- CI workflow for multiplayer simulation
 
-This is still demo-safe:
-- no real robots
-- no live arena
-- no real money
-- no production EOS requirement
+## What this pack does
 
-It is the correct bridge between:
-- Unreal gameplay events
-- AFL runtime ingestion
-- official result/reward generation
-- later live network transport
+This pack can:
+
+- create deterministic session IDs
+- assemble players into lobbies
+- validate minimum player count
+- start a simulated multiplayer match session
+- emit session, match, and reward artifacts
+- support repeatable local end-to-end session testing
+
+## What this pack does not claim
+
+This pack does not provide:
+- real dedicated network replication
+- production EOS matchmaking
+- production persistence
+- anti-cheat
+- live robot control
+
+It is the correct next layer after Phase 5 so AFL can test session-backed multiplayer flows locally.

@@ -1,0 +1,15 @@
+session_type: PrivateLobby
+queue_name: CustomRoom
+players:
+  - player_alpha
+  - player_beta
+arena: CrashSiteOmega
+mode: AssaultCore
+session:
+  min_players: 2
+match:
+  duration_seconds: 45
+expected:
+  winner: player_alpha
+  coins_awarded: 100
+  xp_awarded: 250

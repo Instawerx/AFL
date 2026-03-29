@@ -1,0 +1,17 @@
+session_type: PublicCompetitive
+queue_name: QuickMatch
+players:
+  - player_alpha
+  - player_beta
+  - player_gamma
+  - player_delta
+arena: CrashSiteOmega
+mode: AssaultCore
+session:
+  min_players: 2
+match:
+  duration_seconds: 60
+expected:
+  winner: player_alpha
+  coins_awarded: 100
+  xp_awarded: 250
