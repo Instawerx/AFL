@@ -1,0 +1,9 @@
+session_type: PublicCompetitive
+queue_name: QuickMatch
+players:
+  - player_alpha
+  - player_beta
+  - player_gamma
+  - player_delta
+arena: CrashSiteOmega
+mode: AssaultCore

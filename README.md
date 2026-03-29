@@ -1,35 +1,34 @@
-# AFL Phase 6 — Multiplayer Orchestrator + Real Match Sessions
+# AFL Phase 7 — Network Layer + Live Player Connections
 
-This pack upgrades AFL from live event playback into a local multiplayer orchestration layer.
+This pack upgrades AFL from local multiplayer orchestration into a **real-time network session scaffold**.
 
 It adds:
 
-- session registry
-- lobby simulator
-- multiplayer match coordinator
-- session-backed orchestrator
-- PowerShell runners
-- sample multiplayer scenarios
-- CI workflow for multiplayer simulation
+- a lightweight TCP session server
+- a live client connector for local players/bots
+- match state sync scaffolding
+- session event broadcast loop
+- PowerShell runners for server and clients
+- sample network scenarios
+- CI workflow for local network smoke checks
 
 ## What this pack does
 
 This pack can:
 
-- create deterministic session IDs
-- assemble players into lobbies
-- validate minimum player count
-- start a simulated multiplayer match session
-- emit session, match, and reward artifacts
-- support repeatable local end-to-end session testing
+- start a local TCP session server
+- accept multiple client connections
+- process simple join / ready / state messages
+- broadcast session state to all connected clients
+- generate network session artifacts for AFL runtime validation
 
 ## What this pack does not claim
 
 This pack does not provide:
-- real dedicated network replication
-- production EOS matchmaking
-- production persistence
+- production-grade netcode
+- finished Unreal replication
+- production EOS transport
 - anti-cheat
-- live robot control
+- internet-hosted matchmaking
 
-It is the correct next layer after Phase 5 so AFL can test session-backed multiplayer flows locally.
+It is the correct next layer so AFL can move from simulated multiplayer into **live local connected sessions**.
