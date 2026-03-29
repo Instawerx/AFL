@@ -1,0 +1,30 @@
+name: AFL Phase3 EOS Runtime
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase3-eos-runtime.yml'
+
+jobs:
+  eos-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: python -m pip install pyyaml
+
+      - name: Run EOS smoke adapter
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_eos_session_smoke.ps1 -RepoRoot . -Scenario .\tests\runtime\scenarios\eos_quickmatch_smoke.yaml
