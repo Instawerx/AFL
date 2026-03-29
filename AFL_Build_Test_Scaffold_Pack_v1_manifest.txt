@@ -1,0 +1,9 @@
+AFL Build/Test Scaffold Pack v1
+
+AFL_Build_Test_Scaffold_Pack_v1/.gitignore | 23 bytes | sha256:c796aab0e7d064e4
+AFL_Build_Test_Scaffold_Pack_v1/README.md | 1232 bytes | sha256:af59d49bfd431f8e
+AFL_Build_Test_Scaffold_Pack_v1/build/buildgraph/AFL_BuildGraph.xml | 2751 bytes | sha256:0438d9f790bb8a3b
+AFL_Build_Test_Scaffold_Pack_v1/build/scripts/run_fast_validation.ps1 | 1696 bytes | sha256:ebcbb1c649a57497
+AFL_Build_Test_Scaffold_Pack_v1/build/scripts/run_packaged_smoke.ps1 | 1727 bytes | sha256:2eefc4543e1a8e65
+AFL_Build_Test_Scaffold_Pack_v1/build/scripts/run_queue_reward_test.ps1 | 1423 bytes | sha256:1b8468274fdcce90
+AFL_Build_Test_Scaffold_Pack_v1/templates/workflow-template.md | 443 bytes | sha256:9dfdb9755ee8891e

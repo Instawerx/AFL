@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BuildGraph xmlns="http://www.epicgames.com/BuildGraph">
+  <!--
+    AFL BuildGraph scaffold
+    Purpose:
+      - Validate repo and content
+      - Compile editor target
+      - Run fast validation scripts
+      - Provide placeholders for cook/package/smoke flows
+    Notes:
+      - Update UE_ROOT and PROJECT_PATH when integrating into your environment
+      - Requires RunUAT.bat from the selected Unreal Engine install
+  -->
+
+  <Properties>
+    <Property Name="ProjectName" Value="AFL"/>
+    <Property Name="ProjectPath" Value="$(RootDir)\AFL.uproject"/>
+    <Property Name="UERoot" Value="C:\Program Files\Epic Games\UE_5.4"/>
+    <Property Name="RunUAT" Value="$(UERoot)\Engine\Build\BatchFiles\RunUAT.bat"/>
+    <Property Name="ArtifactsDir" Value="$(RootDir)\artifacts"/>
+    <Property Name="LogDir" Value="$(ArtifactsDir)\logs"/>
+    <Property Name="Platform" Value="Win64"/>
+    <Property Name="Configuration" Value="Development"/>
+  </Properties>
+
+  <Agents>
+    <Agent Name="DefaultAgent" Type="Default"/>
+  </Agents>
+
+  <Nodes>
+    <Node Name="Init" Agent="DefaultAgent">
+      <MakeDirectory Directories="$(ArtifactsDir);$(LogDir)"/>
+    </Node>
+
+    <Node Name="ValidateRepo" Requires="Init" Agent="DefaultAgent">
+      <Command Name="Validate Repo" Arguments='powershell -ExecutionPolicy Bypass -File "$(RootDir)\build\scripts\run_fast_validation.ps1" -RepoRoot "$(RootDir)" -LogDir "$(LogDir)"'/>
+    </Node>
+
+    <Node Name="CompileEditor" Requires="ValidateRepo" Agent="DefaultAgent">
+      <Command Name="Compile Editor Target"
+               Arguments='"$(RunUAT)" BuildCookRun -project="$(ProjectPath)" -noP4 -build -skipcook -skipstage -skippackage -targetplatform=$(Platform) -clientconfig=$(Configuration) -utf8output -unattended -log="$(LogDir)\uat_compile.log"'/>
+    </Node>
+
+    <Node Name="PackagedSmoke" Requires="CompileEditor" Agent="DefaultAgent">
+      <Command Name="Run Packaged Smoke"
+               Arguments='powershell -ExecutionPolicy Bypass -File "$(RootDir)\build\scripts\run_packaged_smoke.ps1" -RepoRoot "$(RootDir)" -ProjectPath "$(ProjectPath)" -UERoot "$(UERoot)" -Platform "$(Platform)" -Configuration "$(Configuration)" -LogDir "$(LogDir)"'/>
+    </Node>
+
+    <Node Name="QueueRewardTest" Requires="PackagedSmoke" Agent="DefaultAgent">
+      <Command Name="Run Queue Reward Test"
+               Arguments='powershell -ExecutionPolicy Bypass -File "$(RootDir)\build\scripts\run_queue_reward_test.ps1" -RepoRoot "$(RootDir)" -ProjectPath "$(ProjectPath)" -UERoot "$(UERoot)" -Platform "$(Platform)" -Configuration "$(Configuration)" -LogDir "$(LogDir)"'/>
+    </Node>
+
+    <Aggregate Name="AFL_DefaultPipeline" Requires="QueueRewardTest"/>
+  </Nodes>
+</BuildGraph>

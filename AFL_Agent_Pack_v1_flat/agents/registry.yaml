@@ -1,0 +1,501 @@
+version: 1
+project: Avatar Fight League
+registry_name: AFL Agent Registry
+default_branch_policy: No agent writes directly to protected branches. Feature/review branches only.
+protected_zones:
+  - Source/AFLEconomy/Authority/
+  - Source/AFLMatchmaking/Authority/
+  - Source/AFLNet/Security/
+  - Source/AFLProgression/Persistence/
+  - "Content/Arenas/*/GameplayAuthority/"
+required_agent_fields:
+  - id
+  - name
+  - mission
+  - primary_domains
+  - allowed_paths
+  - protected_paths
+  - inputs
+  - outputs
+  - handoff_targets
+  - success_checks
+  - kpis
+  - system_prompt
+agents:
+  -
+    id: master-orchestrator
+    file: agents/master-orchestrator.md
+    name: Master Orchestrator
+    mission: Plan build order, route tasks to experts, enforce protected zones, and prevent repo drift.
+    primary_domains:
+      - planning
+      - workflow-control
+      - handoff-governance
+    allowed_paths:
+      - agents/
+      - skills/
+      - workflows/
+      - Docs/
+      - build/
+      - .github/
+    protected_paths:
+      - Source/AFLEconomy/
+      - Source/AFLMatchmaking/
+      - Source/AFLNet/
+      - "Content/Arenas/*/GameplayAuthority/"
+    inputs:
+      - project brief
+      - repo map
+      - current sprint goals
+      - validation output
+    outputs:
+      - task plans
+      - handoff checklists
+      - execution order
+      - risk notes
+    handoff_targets:
+      - unreal-systems-architect
+      - lyra-platform-engineer
+      - arena-builder
+      - test-gauntlet-engineer
+    success_checks:
+      - Every task has one owner
+      - Protected zones are not assigned to unsafe agents
+      - Work order matches AFL build constitution
+      - Deliverables are verifiable
+    kpis:
+      - planning_accuracy
+      - blocked_task_reduction
+      - handoff_clarity
+      - validation_pass_rate
+    status: active
+  -
+    id: unreal-systems-architect
+    file: agents/unreal-systems-architect.md
+    name: Unreal Systems Architect
+    mission: Define module boundaries, plugin ownership, data flow, and authority rules for AFL in Unreal.
+    primary_domains:
+      - architecture
+      - plugins
+      - module-ownership
+    allowed_paths:
+      - Source/
+      - Plugins/
+      - Docs/
+      - templates/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLMatchmaking/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - build constitution
+      - master plan
+      - existing module tree
+    outputs:
+      - module maps
+      - plugin boundaries
+      - ownership documents
+      - interface definitions
+    handoff_targets:
+      - lyra-platform-engineer
+      - gameplay-replication-engineer
+      - eos-matchmaking-engineer
+    success_checks:
+      - No shared feature is trapped in a mode module
+      - Authority paths are explicit
+      - Modules compile independently where practical
+    kpis:
+      - cross-module_dependency_count
+      - compile_breakage_rate
+      - ownership_conflicts
+    status: active
+  -
+    id: lyra-platform-engineer
+    file: agents/lyra-platform-engineer.md
+    name: Lyra Platform Engineer
+    mission: Retain useful Lyra foundations, remove sample bloat, and convert reusable systems into AFL-ready chassis code.
+    primary_domains:
+      - lyra
+      - refactoring
+      - game-feature-extraction
+    allowed_paths:
+      - Source/
+      - Plugins/AFLGameFeatures/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/
+      - Source/AFLMatchmaking/
+      - Source/AFLNet/Security/
+    inputs:
+      - Lyra project tree
+      - module ownership map
+      - combat family goals
+    outputs:
+      - prune plans
+      - migration checklists
+      - adapter code notes
+      - extraction tasks
+    handoff_targets:
+      - unreal-systems-architect
+      - gameplay-replication-engineer
+      - hud-telemetry-designer
+    success_checks:
+      - Input/GAS/equipment patterns remain functional
+      - Sample identities are removed or isolated
+      - Combat families remain extensible
+    kpis:
+      - dead_asset_reduction
+      - lyra_feature_preservation
+      - migration_regression_count
+    status: active
+  -
+    id: arena-builder
+    file: agents/arena-builder.md
+    name: Arena Builder
+    mission: Turn the Crash Site Omega reference pack into readable blockouts, gameplay anchors, and reviewable arena passes.
+    primary_domains:
+      - level-design
+      - blockout
+      - readability
+    allowed_paths:
+      - Content/Arenas/
+      - Docs/AFL/ArenaReference/
+      - build/
+    protected_paths:
+      - "Content/Arenas/*/GameplayAuthority/"
+      - Source/AFLEconomy/
+      - Source/AFLMatchmaking/
+    inputs:
+      - arena reference pack
+      - gameplay logic board
+      - robot scale metrics
+    outputs:
+      - blockout tasks
+      - prop placement plans
+      - camera anchor passes
+      - review screenshots
+    handoff_targets:
+      - cargo-import-pipeline-engineer
+      - hud-telemetry-designer
+      - test-gauntlet-engineer
+    success_checks:
+      - Center lane is readable at speed
+      - Objective is visible and legible
+      - Flanks are viable and not decorative
+      - Broadcast anchors exist
+    kpis:
+      - readability_issues
+      - hotspot_quality
+      - camera_coverage
+      - playtest_route_success
+    status: active
+  -
+    id: gameplay-replication-engineer
+    file: agents/gameplay-replication-engineer.md
+    name: Gameplay Replication Engineer
+    mission: Implement authoritative combat, objective, overtime, and round-state logic that behaves correctly in multiplayer.
+    primary_domains:
+      - replication
+      - authority
+      - combat-state
+    allowed_paths:
+      - Source/AFLCore/
+      - "Source/AFLCombat*/"
+      - Source/AFLArena/
+      - Source/AFLModeAssault/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLMatchmaking/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - systems architecture board
+      - gameplay logic board
+      - network constraints
+    outputs:
+      - replication tasks
+      - authority diagrams
+      - state transition tests
+      - edge-case notes
+    handoff_targets:
+      - test-gauntlet-engineer
+      - perf-observability-engineer
+    success_checks:
+      - Score truth is server-owned
+      - Objective contest logic is deterministic
+      - Respawn and overtime synchronize cleanly
+    kpis:
+      - replication_bugs
+      - desync_rate
+      - round_resolution_failures
+    status: active
+  -
+    id: eos-matchmaking-engineer
+    file: agents/eos-matchmaking-engineer.md
+    name: EOS Matchmaking Engineer
+    mission: Build lobby, party, queue, session, and reconnect flows on EOS without leaking authority to clients.
+    primary_domains:
+      - eos
+      - sessions
+      - lobbies
+    allowed_paths:
+      - Source/AFLMatchmaking/
+      - Source/AFLNet/
+      - Source/AFLUI/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - session classes
+      - queue UX flow
+      - online shell requirements
+    outputs:
+      - EOS flow docs
+      - queue state machines
+      - reconnect handling plans
+      - test cases
+    handoff_targets:
+      - economy-antiabuse-engineer
+      - test-gauntlet-engineer
+    success_checks:
+      - Public and private sessions are distinguished
+      - Rejoin behavior is defined
+      - Queue transitions are explicit
+    kpis:
+      - queue_failure_rate
+      - match_found_to_join_latency
+      - reconnect_success_rate
+    status: active
+  -
+    id: economy-antiabuse-engineer
+    file: agents/economy-antiabuse-engineer.md
+    name: Economy Anti-Abuse Engineer
+    mission: Define and protect Coins, Tickets, XP, reward grants, and anti-abuse logic for AFL sessions.
+    primary_domains:
+      - economy
+      - anti-abuse
+      - reward-authority
+    allowed_paths:
+      - Source/AFLEconomy/
+      - Source/AFLProgression/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - reward tables
+      - session classes
+      - match events
+      - abuse risks
+    outputs:
+      - payout rules
+      - ticket rules
+      - abuse checks
+      - validation tests
+    handoff_targets:
+      - eos-matchmaking-engineer
+      - test-gauntlet-engineer
+      - perf-observability-engineer
+    success_checks:
+      - Client cannot self-grant rewards
+      - Private/test sessions are constrained
+      - AFK and collusion checks exist
+    kpis:
+      - invalid_reward_attempts
+      - duplicate_grant_rate
+      - abuse_flag_accuracy
+    status: active
+  -
+    id: hud-telemetry-designer
+    file: agents/hud-telemetry-designer.md
+    name: HUD Telemetry Designer
+    mission: Create robotics-centric HUD, command panels, and broadcast overlays that preserve clarity under pressure.
+    primary_domains:
+      - ui
+      - telemetry
+      - broadcast
+    allowed_paths:
+      - Source/AFLUI/
+      - Source/AFLBroadcast/
+      - Content/UI/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLMatchmaking/Authority/
+    inputs:
+      - build constitution
+      - gameplay logic board
+      - arena camera anchors
+    outputs:
+      - HUD panel specs
+      - overlay wireframes
+      - UI state maps
+      - style tokens
+    handoff_targets:
+      - arena-builder
+      - audio-events-engineer
+      - test-gauntlet-engineer
+    success_checks:
+      - Critical robot status is always visible
+      - Objective state is readable
+      - Visual language feels like command telemetry
+    kpis:
+      - hud_occlusion_issues
+      - ui_readability_score
+      - broadcast_clarity_score
+    status: active
+  -
+    id: cargo-import-pipeline-engineer
+    file: agents/cargo-import-pipeline-engineer.md
+    name: Cargo Import Pipeline Engineer
+    mission: Standardize KitBash Cargo asset intake, naming, collision, Nanite, and placement metadata for AFL arenas.
+    primary_domains:
+      - asset-pipeline
+      - import-automation
+      - content-validation
+    allowed_paths:
+      - Content/Arenas/
+      - build/scripts/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/
+      - Source/AFLMatchmaking/
+      - Source/AFLNet/Security/
+    inputs:
+      - arena build kit
+      - content folder law
+      - import rules
+    outputs:
+      - import SOPs
+      - naming maps
+      - validator rules
+      - asset tags
+    handoff_targets:
+      - arena-builder
+      - perf-observability-engineer
+    success_checks:
+      - Hero props import into correct folders
+      - Collision and Nanite policy is applied consistently
+      - Props are tagged by role
+    kpis:
+      - import_failure_rate
+      - bad_asset_path_count
+      - collision_misconfig_count
+    status: active
+  -
+    id: audio-events-engineer
+    file: agents/audio-events-engineer.md
+    name: Audio Events Engineer
+    mission: Map imported announcer and robot voice assets to gameplay and broadcast events with reliable routing.
+    primary_domains:
+      - audio
+      - event-routing
+      - announcer-systems
+    allowed_paths:
+      - Source/AFLAudio/
+      - Content/Audio/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - event taxonomy
+      - gameplay logic board
+      - voice asset list
+    outputs:
+      - cue maps
+      - event routing tables
+      - import conventions
+      - trigger tests
+    handoff_targets:
+      - hud-telemetry-designer
+      - test-gauntlet-engineer
+    success_checks:
+      - Objective and overtime cues fire correctly
+      - Announcer VO does not double-trigger
+      - Audio categories are validated
+    kpis:
+      - missing_audio_triggers
+      - double_fire_rate
+      - routing_errors
+    status: active
+  -
+    id: test-gauntlet-engineer
+    file: agents/test-gauntlet-engineer.md
+    name: Test Gauntlet Engineer
+    mission: Build fast editor tests, packaged smoke tests, and end-to-end Gauntlet scenarios for AFL vertical slices.
+    primary_domains:
+      - testing
+      - gauntlet
+      - automation
+    allowed_paths:
+      - build/
+      - .github/
+      - Source/AFLTools/
+      - Docs/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - state machines
+      - queue flow
+      - reward rules
+      - arena pass criteria
+    outputs:
+      - test plans
+      - Gauntlet cases
+      - smoke scripts
+      - failure triage notes
+    handoff_targets:
+      - perf-observability-engineer
+      - master-orchestrator
+    success_checks:
+      - Queue to reward flow is testable
+      - Packaged build smoke passes are reproducible
+      - Validation failures stop promotion
+    kpis:
+      - test_coverage
+      - smoke_pass_rate
+      - flaky_test_rate
+      - mttr_failures
+    status: active
+  -
+    id: perf-observability-engineer
+    file: agents/perf-observability-engineer.md
+    name: Performance Observability Engineer
+    mission: Track load time, frame time, memory, logs, artifacts, and build regressions across AFL iterations.
+    primary_domains:
+      - performance
+      - telemetry
+      - observability
+    allowed_paths:
+      - build/
+      - .github/
+      - Docs/
+      - Source/AFLTools/
+    protected_paths:
+      - Source/AFLEconomy/Authority/
+      - Source/AFLNet/Security/
+    inputs:
+      - build outputs
+      - test logs
+      - arena metrics
+      - runner constraints
+    outputs:
+      - perf budgets
+      - artifact policies
+      - log schemas
+      - regression reports
+    handoff_targets:
+      - master-orchestrator
+      - test-gauntlet-engineer
+    success_checks:
+      - Budgets are defined and enforced
+      - Artifacts are retained predictably
+      - Critical regressions are surfaced early
+    kpis:
+      - load_time_regression
+      - frame_time_regression
+      - memory_regression
+      - artifact_completeness
+    status: active

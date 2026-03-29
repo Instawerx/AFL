@@ -1,0 +1,30 @@
+name: AFL Phase2 Runtime
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase2-runtime.yml'
+
+jobs:
+  runtime-dry-run:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: python -m pip install pyyaml
+
+      - name: Run queue reward harness
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_queue_reward_harness.ps1 -RepoRoot . -Scenario .\tests\runtime\scenarios\quickmatch_reward.yaml

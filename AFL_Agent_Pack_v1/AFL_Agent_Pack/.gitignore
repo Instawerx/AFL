@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+
+# Unreal generated
+DerivedDataCache/
+Saved/
+Intermediate/
+Binaries/
+
+# Logs
+*.log
