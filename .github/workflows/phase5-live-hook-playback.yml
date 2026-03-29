@@ -1,0 +1,41 @@
+name: AFL Phase5 Live Hook Playback
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase5-live-hook-playback.yml'
+
+jobs:
+  playback-validation:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: python -m pip install pyyaml
+
+      - name: Seed recorded event file
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path .\artifacts\unreal_events | Out-Null
+          Copy-Item .\tests\runtime\scenarios\recorded_match_events.json .\artifacts\unreal_events\recorded_match_events.json -Force
+
+      - name: Run live hook
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_live_unreal_hook.ps1 -RepoRoot . -WatchDir .\artifacts\unreal_events -OutputDir .\artifacts\runtime
+
+      - name: Run playback
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_match_playback.ps1 -RepoRoot . -EventFile .\tests\runtime\scenarios\recorded_match_events.json -OutputDir .\artifacts\runtime
