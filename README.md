@@ -1,16 +1,13 @@
-# AFL Phase 15 — Unreal Blueprint / UMG Implementation Pack
+# AFL Phase 16 — Unreal Execution Pack
 
-This pack upgrades AFL from Unreal runtime integration artifacts into an **implementation-ready Blueprint / UMG layer**.
+This pack upgrades AFL from Blueprint/UMG implementation specs into an actual Unreal execution plan pack.
 
 It adds:
-
-- Blueprint class implementation specs
-- Widget hierarchy specs
-- JSON polling update loop spec
-- Sequencer camera cue application spec
-- Lyra demo boot flow spec
-- runnable validation helpers
-- PowerShell runners
-- CI workflow for implementation artifact checks
-
-This is still artifact/spec-driven, but now tightly aligned to actual Unreal implementation work.
+- node-by-node Blueprint graph guides
+- UMG widget construction layouts
+- Sequencer / camera setup guide
+- level bootflow implementation guide
+- JSON polling implementation guide
+- validation checklists
+- PowerShell runners for artifact validation
+- a single Unreal execution bundle index
