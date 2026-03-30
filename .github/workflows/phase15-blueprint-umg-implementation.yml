@@ -1,0 +1,42 @@
+name: AFL Phase15 Blueprint UMG Implementation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase15-blueprint-umg-implementation.yml'
+
+jobs:
+  blueprint-umg-spec-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Seed unreal runtime artifacts
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path .\artifacts\unreal_runtime | Out-Null
+          Copy-Item .\tests\runtime\scenarios\runtime_seed_bundle\widget_binding_map.json .\artifacts\unreal_runtime -Force
+          Copy-Item .\tests\runtime\scenarios\runtime_seed_bundle\camera_binding_manifest.json .\artifacts\unreal_runtime -Force
+          Copy-Item .\tests\runtime\scenarios\runtime_seed_bundle\json_polling_bridge.json .\artifacts\unreal_runtime -Force
+          Copy-Item .\tests\runtime\scenarios\runtime_seed_bundle\demo_scene_runtime_manifest.json .\artifacts\unreal_runtime -Force
+          Copy-Item .\tests\runtime\scenarios\runtime_seed_bundle\lyra_demo_map_manifest.json .\artifacts\unreal_runtime -Force
+
+      - name: Build Blueprint impl specs
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_blueprint_impl_build.ps1 -RepoRoot . -RuntimeDir .\artifacts\unreal_runtime -OutputDir .\artifacts\unreal_impl
+
+      - name: Build Widget impl specs
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_widget_impl_build.ps1 -RepoRoot . -RuntimeDir .\artifacts\unreal_runtime -OutputDir .\artifacts\unreal_impl
+
+      - name: Build Demo bootflow specs
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_demo_bootflow_build.ps1 -RepoRoot . -RuntimeDir .\artifacts\unreal_runtime -ImplDir .\artifacts\unreal_impl -OutputDir .\artifacts\unreal_impl

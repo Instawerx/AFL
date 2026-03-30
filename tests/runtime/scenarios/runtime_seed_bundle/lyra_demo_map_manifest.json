@@ -1,0 +1,21 @@
+{
+  "map_name": "CrashSiteOmega_Demo",
+  "arena": "CrashSiteOmega",
+  "mode": "AssaultCore",
+  "startup_sequence": [
+    "Spawn BP_AFL_RuntimeBridge",
+    "Spawn BP_AFL_SpectatorController",
+    "Load widget binding map",
+    "Load camera binding manifest",
+    "Start JSON polling bridge",
+    "Apply scene playback manifest"
+  ],
+  "widget_classes": [
+    "WBP_AFL_Scoreboard",
+    "WBP_AFL_LowerThirdStack",
+    "WBP_AFL_AnnouncerBanner",
+    "WBP_AFL_MatchPhase"
+  ],
+  "camera_track": "AFL_CameraCueTrack",
+  "bridge_mode": "file_polling"
+}

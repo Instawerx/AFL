@@ -1,0 +1,13 @@
+{
+  "demo_map": "CrashSiteOmega_Demo",
+  "lyra_compatible": true,
+  "runtime_bridge_actor": "BP_AFL_RuntimeBridge",
+  "spectator_controller": "BP_AFL_SpectatorController",
+  "widget_binding_map_file": "widget_binding_map.json",
+  "camera_binding_manifest_file": "camera_binding_manifest.json",
+  "scene_playback_manifest_file": "scene_playback_manifest.json",
+  "source_visual_manifest": {
+    "demo_name": "AFL_Investor_Demo_Visual",
+    "winner": "player_alpha"
+  }
+}
