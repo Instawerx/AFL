@@ -1,0 +1,4 @@
+[
+  { "camera_id": "hero_wide", "mode": "wide", "target": "player_alpha", "priority": 1 },
+  { "camera_id": "winner_follow", "mode": "follow", "target": "player_alpha", "priority": 2 }
+]

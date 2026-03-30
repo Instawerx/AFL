@@ -1,0 +1,6 @@
+{
+  "widget_type": "match_phase_indicator",
+  "phase": "postgame",
+  "active_camera": "winner_follow",
+  "winner": "player_alpha"
+}

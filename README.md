@@ -1,34 +1,13 @@
-# AFL Phase 11 — HUD / Broadcast Overlay Pack
+# AFL Phase 13 — Unreal Visual Demo (UMG + Camera Control + Scene Playback)
 
-This pack upgrades AFL from raw broadcast/state output into a **watchable spectator overlay layer**.
+This pack upgrades AFL from HUD bridge payloads into a visual Unreal demo layer.
 
 It adds:
 
-- scoreboard packet builder
-- lower-third / player card payload builder
-- announcer event feed builder
-- match director state controller
-- camera packet scaffold
-- PowerShell runners for overlay generation
-- CI workflow for overlay smoke checks
-
-## What this pack does
-
-This pack can:
-
-- turn authoritative/broadcast state into HUD-ready JSON
-- generate overlay packets for scoreboard, player cards, and event callouts
-- build a simple match director state file
-- emit camera packet scaffolds for future Unreal consumption
-- provide investor/demo-facing broadcast artifacts
-
-## What this pack does not claim
-
-This pack does not provide:
-- final Unreal UMG widgets
-- production broadcast graphics
-- live replay compositor
-- final commentary AI
-- final camera automation logic
-
-It is the correct next layer to make AFL visually legible and pitch-ready.
+- UMG data contract pack
+- camera cue timeline builder
+- scene playback controller
+- Unreal demo manifest generator
+- PowerShell runners
+- seed demo data
+- CI workflow for visual demo smoke checks

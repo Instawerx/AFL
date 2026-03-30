@@ -1,0 +1,35 @@
+{
+  "ui_mode": "spectator_demo",
+  "scoreboard_widget": {
+    "widget_type": "scoreboard_widget",
+    "title": "AFL Match Scoreboard",
+    "state": "completed",
+    "winner": "player_alpha"
+  },
+  "lower_third_widget": {
+    "widget_type": "lower_third_stack",
+    "cards": []
+  },
+  "announcer_widget": {
+    "widget_type": "announcer_banner",
+    "messages": [
+      { "type": "callout", "text": "player_alpha has secured the round." }
+    ]
+  },
+  "match_phase_widget": {
+    "widget_type": "match_phase_indicator",
+    "phase": "postgame",
+    "active_camera": "winner_follow",
+    "winner": "player_alpha"
+  },
+  "camera_packets": [
+    { "camera_id": "hero_wide", "mode": "wide", "target": "player_alpha", "priority": 1 },
+    { "camera_id": "winner_follow", "mode": "follow", "target": "player_alpha", "priority": 2 }
+  ],
+  "overlay_visibility": {
+    "scoreboard": true,
+    "lower_thirds": true,
+    "announcer": true,
+    "phase_indicator": true
+  }
+}

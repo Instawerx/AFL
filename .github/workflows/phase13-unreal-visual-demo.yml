@@ -1,0 +1,45 @@
+name: AFL Phase13 Unreal Visual Demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase13-unreal-visual-demo.yml'
+
+jobs:
+  visual-demo-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Seed HUD + broadcast artifacts
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path .\artifacts\hud | Out-Null
+          New-Item -ItemType Directory -Force -Path .\artifacts\broadcast | Out-Null
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\scoreboard_widget_contract.json .\artifacts\hud -Force
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\lower_third_widget_contract.json .\artifacts\hud -Force
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\announcer_widget_contract.json .\artifacts\hud -Force
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\match_phase_widget_contract.json .\artifacts\hud -Force
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\spectator_ui_state.json .\artifacts\hud -Force
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\camera_packets.json .\artifacts\broadcast -Force
+          Copy-Item .\tests\runtime\scenarios\hud_seed_bundle\match_director_state.json .\artifacts\broadcast -Force
+
+      - name: Build UMG payloads
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_umg_payload_build.ps1 -RepoRoot . -HudDir .\artifacts\hud -OutputDir .\artifacts\visual_demo
+
+      - name: Build camera timeline
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_camera_timeline_build.ps1 -RepoRoot . -BroadcastDir .\artifacts\broadcast -HudDir .\artifacts\hud -OutputDir .\artifacts\visual_demo
+
+      - name: Build scene playback manifest
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_scene_playback_build.ps1 -RepoRoot . -VisualDir .\artifacts\visual_demo -OutputDir .\artifacts\visual_demo

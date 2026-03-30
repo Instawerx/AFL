@@ -1,0 +1,21 @@
+{
+  "widget_type": "lower_third_stack",
+  "cards": [
+    {
+      "overlay_type": "player_lower_third",
+      "player_id": "player_alpha",
+      "team": "A",
+      "ready": true,
+      "connected": true,
+      "objective_control": 2
+    },
+    {
+      "overlay_type": "player_lower_third",
+      "player_id": "player_beta",
+      "team": "B",
+      "ready": true,
+      "connected": true,
+      "objective_control": 1
+    }
+  ]
+}
