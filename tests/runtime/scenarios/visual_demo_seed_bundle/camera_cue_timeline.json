@@ -1,0 +1,28 @@
+[
+  {
+    "time_index": 0,
+    "camera_id": "hero_wide",
+    "mode": "wide",
+    "target": "player_alpha",
+    "phase": "postgame",
+    "overlay_state": {
+      "scoreboard": true,
+      "lower_thirds": true,
+      "announcer": true,
+      "phase_indicator": true
+    }
+  },
+  {
+    "time_index": 1,
+    "camera_id": "winner_follow",
+    "mode": "follow",
+    "target": "player_alpha",
+    "phase": "postgame",
+    "overlay_state": {
+      "scoreboard": true,
+      "lower_thirds": true,
+      "announcer": true,
+      "phase_indicator": true
+    }
+  }
+]

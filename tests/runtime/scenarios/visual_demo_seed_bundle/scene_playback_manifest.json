@@ -1,0 +1,11 @@
+{
+  "demo_name": "AFL_Investor_Demo_Visual",
+  "sequence": [
+    { "step": "load_scoreboard", "widget": "WBP_AFL_Scoreboard" },
+    { "step": "load_lower_thirds", "widget": "WBP_AFL_LowerThirdStack" },
+    { "step": "load_announcer", "widget": "WBP_AFL_AnnouncerBanner" },
+    { "step": "load_phase_widget", "widget": "WBP_AFL_MatchPhase" },
+    { "step": "play_camera_timeline", "cue_count": 2 }
+  ],
+  "winner": "player_alpha"
+}

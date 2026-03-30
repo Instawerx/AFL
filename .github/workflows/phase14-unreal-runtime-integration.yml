@@ -1,0 +1,33 @@
+name: AFL Phase14 Unreal Runtime Integration
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, integration ]
+    paths:
+      - 'build/**'
+      - 'tests/runtime/**'
+      - '.github/workflows/phase14-unreal-runtime-integration.yml'
+
+jobs:
+  unreal-runtime-bridge-smoke:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Seed visual demo artifacts
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path .\artifacts\visual_demo | Out-Null
+          Copy-Item .\tests\runtime\scenarios\visual_demo_seed_bundle\* .\artifacts\visual_demo -Force
+
+      - name: Build runtime bridge
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_unreal_runtime_bridge_build.ps1 -RepoRoot . -VisualDir .\artifacts\visual_demo -OutputDir .\artifacts\unreal_runtime
+
+      - name: Build demo map manifest
+        shell: powershell
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build\scripts\run_demo_map_manifest_build.ps1 -RepoRoot . -RuntimeDir .\artifacts\unreal_runtime -OutputDir .\artifacts\unreal_runtime

@@ -1,0 +1,40 @@
+from __future__ import annotations
+
+def build_widget_binding_map() -> dict:
+    return {
+        "scoreboard_widget": {
+            "widget_class": "WBP_AFL_Scoreboard",
+            "source_file": "scoreboard_umg_payload.json",
+            "bindings": {
+                "TitleText": "data.title",
+                "WinnerText": "data.winner",
+                "TeamAPlayers": "data.team_a_players",
+                "TeamBPlayers": "data.team_b_players",
+                "TeamAObjectiveControl": "data.team_a_objective_control",
+                "TeamBObjectiveControl": "data.team_b_objective_control",
+            },
+        },
+        "lower_third_widget": {
+            "widget_class": "WBP_AFL_LowerThirdStack",
+            "source_file": "lower_thirds_umg_payload.json",
+            "bindings": {
+                "Cards": "data.cards",
+            },
+        },
+        "announcer_widget": {
+            "widget_class": "WBP_AFL_AnnouncerBanner",
+            "source_file": "announcer_umg_payload.json",
+            "bindings": {
+                "Messages": "data.messages",
+            },
+        },
+        "phase_widget": {
+            "widget_class": "WBP_AFL_MatchPhase",
+            "source_file": "phase_umg_payload.json",
+            "bindings": {
+                "Phase": "data.phase",
+                "ActiveCamera": "data.active_camera",
+                "Winner": "data.winner",
+            },
+        },
+    }

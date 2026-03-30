@@ -1,0 +1,8 @@
+{
+  "widget_name": "WBP_AFL_AnnouncerBanner",
+  "data": {
+    "messages": [
+      { "type": "callout", "text": "player_alpha has secured the round." }
+    ]
+  }
+}

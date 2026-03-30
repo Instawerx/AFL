@@ -1,0 +1,11 @@
+{
+  "widget_name": "WBP_AFL_Scoreboard",
+  "data": {
+    "title": "AFL Match Scoreboard",
+    "winner": "player_alpha",
+    "team_a_players": ["player_alpha"],
+    "team_b_players": ["player_beta"],
+    "team_a_objective_control": 2,
+    "team_b_objective_control": 1
+  }
+}

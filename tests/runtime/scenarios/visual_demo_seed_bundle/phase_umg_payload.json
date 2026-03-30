@@ -1,0 +1,8 @@
+{
+  "widget_name": "WBP_AFL_MatchPhase",
+  "data": {
+    "phase": "postgame",
+    "active_camera": "winner_follow",
+    "winner": "player_alpha"
+  }
+}
